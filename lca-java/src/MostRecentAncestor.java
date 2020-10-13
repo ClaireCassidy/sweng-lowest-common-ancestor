@@ -1,26 +1,8 @@
+import java.util.ArrayList;
+
 public class MostRecentAncestor {
 
     public static void main(String[] args) {
-//        BinaryTree tree = new BinaryTree(1);
-//
-//        tree.printInOrder();
-//
-//        tree.insert(2);
-//        tree.printInOrder();
-//
-//        tree.insert(3);
-//        tree.insert(4);
-//        tree.insert(5);
-//        tree.insert(6);
-//        tree.insert(7);
-//        tree.insert(8);
-//        tree.insert(9);
-//        tree.insert(10);
-//        tree.insert(11);
-//        tree.insert(12);
-//
-//        tree.printInOrderVerbose();
-//        tree.printInOrder();
 
         BinaryTree tree = generateTestTree();
 //                     __[1]__
@@ -37,6 +19,21 @@ public class MostRecentAncestor {
 //                             [15]      [17]
 
         tree.printInOrderVerbose();
+
+        int valueToFind = 12;
+        ArrayList<Node> path = tree.getPathTo(8);
+
+        System.out.println("\n\nPATH:");
+        for (Node node : path) {
+            System.out.print(node.getVal() + " ");
+        }
+
+        int val1 = 15;
+        int val2 = 17;
+        Node lowestCommonAncestor = tree.getLowestCommonAncestor(val1, val2);
+        System.out.println("LCA: " + lowestCommonAncestor.getVal());
+
+
     }
 
     private static BinaryTree generateTestTree() {
