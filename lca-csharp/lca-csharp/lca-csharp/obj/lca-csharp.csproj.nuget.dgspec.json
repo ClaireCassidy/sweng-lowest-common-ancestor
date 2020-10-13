@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\clair\\dev\\year3\\software-engineering\\ancestor\\lca-csharp\\lca-csharp\\lca-csharp\\lca-csharp.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\clair\\dev\\year3\\software-engineering\\ancestor\\lca-csharp\\lca-csharp\\lca-csharp\\lca-csharp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\clair\\dev\\year3\\software-engineering\\ancestor\\lca-csharp\\lca-csharp\\lca-csharp\\lca-csharp.csproj",
+        "projectName": "lca-csharp",
+        "projectPath": "C:\\Users\\clair\\dev\\year3\\software-engineering\\ancestor\\lca-csharp\\lca-csharp\\lca-csharp\\lca-csharp.csproj",
+        "packagesPath": "C:\\Users\\clair\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\clair\\dev\\year3\\software-engineering\\ancestor\\lca-csharp\\lca-csharp\\lca-csharp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\clair\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
