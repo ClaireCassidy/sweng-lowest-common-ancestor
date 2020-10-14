@@ -8,3 +8,4 @@ C:\Users\clair\dev\year3\software-engineering\ancestor\lca-csharp\lca-csharp\lca
 C:\Users\clair\dev\year3\software-engineering\ancestor\lca-csharp\lca-csharp\lca-csharp\obj\Debug\netcoreapp2.1\lca-csharp.AssemblyInfo.cs
 C:\Users\clair\dev\year3\software-engineering\ancestor\lca-csharp\lca-csharp\lca-csharp\obj\Debug\netcoreapp2.1\lca-csharp.dll
 C:\Users\clair\dev\year3\software-engineering\ancestor\lca-csharp\lca-csharp\lca-csharp\obj\Debug\netcoreapp2.1\lca-csharp.pdb
+C:\Users\clair\dev\year3\software-engineering\ancestor\lca-csharp\lca-csharp\lca-csharp\obj\Debug\netcoreapp2.1\lca-csharp.csprojAssemblyReference.cache
