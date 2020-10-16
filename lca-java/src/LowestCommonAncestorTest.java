@@ -7,7 +7,7 @@ import org.junit.runners.JUnit4;
 import java.util.ArrayList;
 
 @RunWith(JUnit4.class)
-public class MostRecentAncestorTest {
+public class LowestCommonAncestorTest {
 
     @Test
     public void testRoot() {
@@ -126,7 +126,7 @@ public class MostRecentAncestorTest {
         //            [5]     [7] [13]      [14]      [16]
         //                                 /         /
         //                             [15]      [17]
-        testTree = MostRecentAncestor.generateTestTree();
+        testTree = LowestCommonAncestor.generateTestTree();
         testTree.insert(18);
 
         assertEquals("Test insertion into an arbitrary-shaped binary tree puts the node in the correct spot",
@@ -136,7 +136,7 @@ public class MostRecentAncestorTest {
 
     @Test
     public void testGetLowestCommonAncestor() {
-        BinaryTree testTree = MostRecentAncestor.generateTestTree();
+        BinaryTree testTree = LowestCommonAncestor.generateTestTree();
 
         //                     __[1]__
         //                    /       \
