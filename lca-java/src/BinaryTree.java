@@ -57,39 +57,39 @@ public class BinaryTree {
         }
     }
 
-    public void printInOrder() {
-        System.out.println("\n\nPRINTING:\n\n");
-        printInOrder(this.root);
-    }
-
-    private static void printInOrder(Node curNode) {
-        if (curNode == null) {
-            return;
-        }
-
-        printInOrder(curNode.getlChild());
-        System.out.print(curNode.getVal() + " ");
-        printInOrder(curNode.getrChild());
-    }
-
-    public void printInOrderVerbose() {
-        System.out.println("\n\nPRINTING:\n\n");
-        printInOrderVerbose(this.root);
-    }
-
-    private static void printInOrderVerbose(Node curNode) {
-        if (curNode == null) {
-            System.out.println("It's null");
-            return;
-        }
-
-        System.out.println(String.format("It's %d", curNode.getVal()));
-        System.out.println(String.format("Going left of %d ... ", curNode.getVal()));
-        printInOrderVerbose(curNode.getlChild());
-        System.out.print(curNode.getVal() + " ");
-        System.out.println(String.format("Going right of %d ... ", curNode.getVal()));
-        printInOrderVerbose(curNode.getrChild());
-    }
+//    public void printInOrder() {
+//        System.out.println("\n\nPRINTING:\n\n");
+//        printInOrder(this.root);
+//    }
+//
+//    private static void printInOrder(Node curNode) {
+//        if (curNode == null) {
+//            return;
+//        }
+//
+//        printInOrder(curNode.getlChild());
+//        System.out.print(curNode.getVal() + " ");
+//        printInOrder(curNode.getrChild());
+//    }
+//
+//    public void printInOrderVerbose() {
+//        System.out.println("\n\nPRINTING:\n\n");
+//        printInOrderVerbose(this.root);
+//    }
+//
+//    private static void printInOrderVerbose(Node curNode) {
+//        if (curNode == null) {
+//            System.out.println("It's null");
+//            return;
+//        }
+//
+//        System.out.println(String.format("It's %d", curNode.getVal()));
+//        System.out.println(String.format("Going left of %d ... ", curNode.getVal()));
+//        printInOrderVerbose(curNode.getlChild());
+//        System.out.print(curNode.getVal() + " ");
+//        System.out.println(String.format("Going right of %d ... ", curNode.getVal()));
+//        printInOrderVerbose(curNode.getrChild());
+//    }
 
 //    Following is simple O(n) algorithm to find LCA of n1 and n2.
 //            1) Find path from root to n1 and store it in a vector or array.
@@ -128,15 +128,15 @@ public class BinaryTree {
 
     }
 
-    public ArrayList<Node> getPathTo(int val) {
-
-        ArrayList<Node> path = new ArrayList<>();
-
-        getPathTo(this.root, val, path);
-
-        return path;
-
-    }
+//    public ArrayList<Node> getPathTo(int val) {
+//
+//        ArrayList<Node> path = new ArrayList<>();
+//
+//        getPathTo(this.root, val, path);
+//
+//        return path;
+//
+//    }
 
     private static boolean getPathTo(Node root, int val, ArrayList<Node> curPath) {
         if (root == null) return false;

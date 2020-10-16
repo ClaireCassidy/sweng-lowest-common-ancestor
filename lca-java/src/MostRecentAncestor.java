@@ -4,39 +4,56 @@ public class MostRecentAncestor {
 
     public static void main(String[] args) {
 
-        BinaryTree tree = generateTestTree();
-//                     __[1]__
-//                    /       \
-//                   /         \
-//                [2]           [9]
-//               /   \             \
-//            [3]     [8]           [10]
-//           /   \                 /    \
-//        [4]     [6]          [11]      [12]
-//           \       \        /    \         \
-//            [5]     [7] [13]      [14]      [16]
-//                                 /         /
-//                             [15]      [17]
-
-        tree.printInOrderVerbose();
-
-        int valueToFind = 12;
-        ArrayList<Node> path = tree.getPathTo(8);
-
-        System.out.println("\n\nPATH:");
-        for (Node node : path) {
-            System.out.print(node.getVal() + " ");
-        }
+//        BinaryTree tree = generateTestTree();
+////                     __[1]__
+////                    /       \
+////                   /         \
+////                [2]           [9]
+////               /   \             \
+////            [3]     [8]           [10]
+////           /   \                 /    \
+////        [4]     [6]          [11]      [12]
+////           \       \        /    \         \
+////            [5]     [7] [13]      [14]      [16]
+////                                 /         /
+////                             [15]      [17]
+//
+//        tree.printInOrderVerbose();
+//
+//        int valueToFind = 12;
+//        ArrayList<Node> path = tree.getPathTo(8);
+//
+//        System.out.println("\n\nPATH:");
+//        for (Node node : path) {
+//            System.out.print(node.getVal() + " ");
+//        }
+//
+//        int val1 = 15;
+//        int val2 = 17;
+//        Node lowestCommonAncestor = tree.getLowestCommonAncestor(val1, val2);
+//        System.out.println("LCA: " + lowestCommonAncestor.getVal());
+//
+        BinaryTree testTree = generateTestTree();
+        //                     __[1]__
+        //                    /       \
+        //                   /         \
+        //                [2]           [9]
+        //               /   \             \
+        //            [3]     [8]           [10]
+        //           /   \                 /    \
+        //        [4]     [6]          [11]      [12]
+        //           \       \        /    \         \
+        //            [5]     [7] [13]      [14]      [16]
+        //                                 /         /
+        //                             [15]      [17]
 
         int val1 = 15;
-        int val2 = 17;
-        Node lowestCommonAncestor = tree.getLowestCommonAncestor(val1, val2);
-        System.out.println("LCA: " + lowestCommonAncestor.getVal());
-
-
+        int val2 = 16;
+        Node lowestCommonAncestor = testTree.getLowestCommonAncestor(val1, val2);
+        System.out.println(String.format("LCA(%d, %d): %d", val1, val2, lowestCommonAncestor.getVal()));
     }
 
-    private static BinaryTree generateTestTree() {
+    public static BinaryTree generateTestTree() {
         BinaryTree tree = new BinaryTree(1);
 
         tree.insert(2);
