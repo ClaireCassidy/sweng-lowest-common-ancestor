@@ -56,52 +56,10 @@ public class BinaryTree {
             } else queue.add(curNode.getrChild());
         }
     }
-
-//    public void printInOrder() {
-//        System.out.println("\n\nPRINTING:\n\n");
-//        printInOrder(this.root);
-//    }
-//
-//    private static void printInOrder(Node curNode) {
-//        if (curNode == null) {
-//            return;
-//        }
-//
-//        printInOrder(curNode.getlChild());
-//        System.out.print(curNode.getVal() + " ");
-//        printInOrder(curNode.getrChild());
-//    }
-//
-//    public void printInOrderVerbose() {
-//        System.out.println("\n\nPRINTING:\n\n");
-//        printInOrderVerbose(this.root);
-//    }
-//
-//    private static void printInOrderVerbose(Node curNode) {
-//        if (curNode == null) {
-//            System.out.println("It's null");
-//            return;
-//        }
-//
-//        System.out.println(String.format("It's %d", curNode.getVal()));
-//        System.out.println(String.format("Going left of %d ... ", curNode.getVal()));
-//        printInOrderVerbose(curNode.getlChild());
-//        System.out.print(curNode.getVal() + " ");
-//        System.out.println(String.format("Going right of %d ... ", curNode.getVal()));
-//        printInOrderVerbose(curNode.getrChild());
-//    }
-
-//    Following is simple O(n) algorithm to find LCA of n1 and n2.
-//            1) Find path from root to n1 and store it in a vector or array.
-//            2) Find path from root to n2 and store it in another vector or array.
-//            3) Traverse both paths till the values in arrays are same. Return the common element just before the mismatch.
-
     public Node getLowestCommonAncestor(int val1, int val2) {
 
         ArrayList<Node> pathToVal1 = new ArrayList<>();
         ArrayList<Node> pathToVal2 = new ArrayList<>();
-
-//        getLowestCommonAncestor(root, val1, val2);
 
         getPathTo(root, val1, pathToVal1);
         getPathTo(root, val2, pathToVal2);
@@ -127,16 +85,6 @@ public class BinaryTree {
         return pathToVal1.get(i-1);
 
     }
-
-//    public ArrayList<Node> getPathTo(int val) {
-//
-//        ArrayList<Node> path = new ArrayList<>();
-//
-//        getPathTo(this.root, val, path);
-//
-//        return path;
-//
-//    }
 
     private static boolean getPathTo(Node root, int val, ArrayList<Node> curPath) {
         if (root == null) return false;
