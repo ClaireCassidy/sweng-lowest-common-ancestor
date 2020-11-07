@@ -21,5 +21,29 @@ public class Node {
         this.parents = parents;
     }
 
-    
+    public ArrayList<Node> getParents() {
+        return parents;
+    }
+
+    public ArrayList<Node> getChildren() {
+        return children;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int incrCount() {
+        count++;
+
+        return count;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
