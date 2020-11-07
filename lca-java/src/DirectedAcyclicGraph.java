@@ -37,8 +37,9 @@ public class DirectedAcyclicGraph {
     }
 
     // testing a generic BFS algorithm
-    public void bfs(Node startNode) {
+    public ArrayList<Integer> bfs(Node startNode) {
         LinkedList<Node> q = new LinkedList<>();
+        ArrayList<Integer> order = new ArrayList<>();
 
         q.add(startNode);
         System.out.println("\nPerforming BFS w starting node "+startNode+"\n");
@@ -46,6 +47,7 @@ public class DirectedAcyclicGraph {
         while(!q.isEmpty()) {
             System.out.println("Queue: "+Arrays.toString(q.toArray()));
             Node curNode = q.remove();
+            order.add(curNode.getVal());
 
             System.out.println("Cur Node: " + curNode);
 
@@ -55,7 +57,62 @@ public class DirectedAcyclicGraph {
             }
             System.out.println();
         }
+        return order;
+    }
 
+    public boolean bfsForTarget(Node startNode, Node target) {
+        LinkedList<Node> q = new LinkedList<>();
+        q.add(startNode);
+        boolean targetFound = false;
+
+        System.out.println("\nPerforming BFS w starting node "+startNode+" seeking target " + target + "\n");
+
+        while(!q.isEmpty()) {
+            System.out.println("Queue: "+Arrays.toString(q.toArray()));
+            Node curNode = q.remove();
+
+            System.out.println("Cur Node: " + curNode);
+
+            if (curNode.getChildren().contains(target)) {
+                targetFound = true;
+                break;
+            }
+            for (Node n: curNode.getChildren()) {
+                q.add(n);
+                System.out.println("Adding "+n+" to queue");
+            }
+            System.out.println();
+        }
+
+        return targetFound;
+    }
+
+    public void colorAncestorsBlue(Node target) {
+        // performs a BFS from each node 'n' to determine if n is an ancestor of 'target'
+        // If so, colors 'n' blue.
+
+        // Create a queue containing all the nodes in the graph
+        LinkedList<Node> nodesInGraph = new LinkedList<>();
+        nodesInGraph.addAll(nodes);
+
+        while (!nodesInGraph.isEmpty()) {
+            Node curStartNode = nodesInGraph.remove();
+
+            boolean ancestorOfTarget = bfsForTarget(curStartNode, target);
+        }
+    }
+
+    // returns a reference to the node in the graph with a given value val
+    public Node getNodeWithValue(int val) {
+        Node theNode = null;
+
+        for (Node n: nodes) {
+            if (n.getVal() == val) {
+                return n;
+            }
+        }
+
+        return theNode;
     }
 
 }

@@ -1,3 +1,4 @@
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -7,12 +8,99 @@ import org.junit.runners.JUnit4;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-//@RunWith(JUnit4.class)
+@RunWith(JUnit4.class)
 public class LowestCommonAncestorDagTest {
 
-    //@Test
-    public void testDAG() {
+    @Test
+    public void testDagBfsGeneric() {
+        // Create graph shown in slides:
+        //                   [1]
+        //                  /   \
+        //               [2]     [3]
+        //              /           \
+        //           [4]             [5]
+        //          /               /   \
+        //       [6]             [7]     [8]
+        //                        |
+        //                       [10]
+        //                      / |  \
+        //                    [9] |   [11]
+        //                       [13]     \
+        //                                 [12]
 
+        // This prototype BFS is used to implement other specialised BFS for the LCA algorithm
+        // The traversal in the specialised BFS is in the same order, just different side effects occur
+        // So if this traversal is correct, then the traversal in the specialised BFS's are correct
+        DirectedAcyclicGraph testDag = generateTestGraph1();
+
+        // extract a starting node; in this case 1:
+        Node startNode = testDag.getNodes().get(0);
+
+        ArrayList<Integer> expectedOrder = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,10,9,13,11,12));
+        ArrayList<Integer> actualOrder = testDag.bfs(startNode);
+
+        assertTrue("Testing BFS traverses the graph in the expected order given start node 1",
+                expectedOrder.equals(actualOrder));
+
+        // try again with a different node (n5)
+        startNode = testDag.getNodes().get(4);
+
+        expectedOrder = new ArrayList<>(Arrays.asList(5,7,8,10,9,13,11,12));
+        actualOrder = testDag.bfs(startNode);
+
+        assertTrue("Testing BFS traverses the graph in the expected order given start node 5",
+                expectedOrder.equals(actualOrder));
+
+        // and with one more node (n8)
+        startNode = testDag.getNodes().get(7);
+
+        expectedOrder = new ArrayList<>(Arrays.asList(8));
+        actualOrder = testDag.bfs(startNode);
+
+        assertTrue("Testing BFS traverses the graph in the expected order given start node 8",
+                expectedOrder.equals(actualOrder));
+    }
+
+    @Test
+    public void testDagBfsForTarget() {
+        // Create graph shown in slides:
+        //                   [1]
+        //                  /   \
+        //               [2]     [3]
+        //              /           \
+        //           [4]             [5]
+        //          /               /   \
+        //       [6]             [7]     [8]
+        //                        |
+        //                       [10]
+        //                      / |  \
+        //                    [9] |   [11]
+        //                       [13]     \
+        //                                 [12]
+
+        // Slightly altered version of the generic BFS algorithm that tests if a 'target' node
+        // is a descendent of a 'start node' (i.e. 'startNode' is an ancestor of 'target'
+
+        DirectedAcyclicGraph testDag = generateTestGraph1();
+
+        // Test if n1 is an ancestor of n6
+        Node startNode = testDag.getNodeWithValue(1);
+        Node target = testDag.getNodeWithValue(6);
+
+        assertTrue("Confirm 1 is an ancestor of 6", testDag.bfsForTarget(startNode, target));
+        assertTrue("Confirm 6 is not an ancestor of 1", !testDag.bfsForTarget(target, startNode));
+
+        startNode = testDag.getNodeWithValue(12);
+        target = testDag.getNodeWithValue(10);
+
+        assertTrue("Confirm 12 is not an ancestor of 10", !testDag.bfsForTarget(startNode, target));
+        assertTrue("Confirm 10 is an ancestor of 12", testDag.bfsForTarget(target, startNode));
+
+        startNode = testDag.getNodeWithValue(8);
+        target = testDag.getNodeWithValue(10);
+
+        assertTrue("Confirm 10 is not an ancestor of 8", !testDag.bfsForTarget(startNode, target));
+        assertTrue("Confirm 8 is not an ancestor of 10", !testDag.bfsForTarget(target, startNode));
     }
 
     public static DirectedAcyclicGraph generateTestGraph1() {
@@ -90,10 +178,10 @@ public class LowestCommonAncestorDagTest {
         return new DirectedAcyclicGraph(dagNodes);
     }
 
-    public static void main(String[] args) {
-        DirectedAcyclicGraph dag = generateTestGraph1();
-
-        dag.printGraph();
-        dag.bfs(dag.getNodes().get(0));
-    }
+//    public static void main(String[] args) {
+//        DirectedAcyclicGraph dag = generateTestGraph1();
+//
+//        dag.printGraph();
+//        bfs(dag.getNodes().get(0));
+//    }
 }
