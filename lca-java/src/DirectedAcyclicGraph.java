@@ -1,3 +1,5 @@
+import sun.awt.image.ImageWatched;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -99,6 +101,40 @@ public class DirectedAcyclicGraph {
             Node curStartNode = nodesInGraph.remove();
 
             boolean ancestorOfTarget = bfsForTarget(curStartNode, target);
+
+            if (ancestorOfTarget) {
+                curStartNode.setColor(Node.Color.BLUE);
+            }
+        }
+    }
+
+    public ArrayList<Node> getBlueNodes() {
+
+        ArrayList<Node> blueNodes = new ArrayList<>();
+
+        System.out.println("Blue nodes: ");
+        for (Node n:nodes) {
+            if (n.getColor().toLowerCase() == "blue") {
+                System.out.println("\t"+n);
+                blueNodes.add(n);
+            }
+        }
+
+        return blueNodes;
+
+    }
+
+    // Sets all nodes' colours back to white
+    public void resetColors() {
+        for (Node n: nodes) {
+            n.setColor(Node.Color.WHITE);
+        }
+    }
+
+    // sets all nodes' counts back to 0
+    public void resetCounts() {
+        for (Node n:nodes) {
+            n.setCount(0);
         }
     }
 

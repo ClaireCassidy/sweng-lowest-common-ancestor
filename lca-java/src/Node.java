@@ -54,6 +54,10 @@ public class Node {
         this.color = color;
     }
 
+    public void setCount(int val) {
+        this.count = val;
+    }
+
     public boolean addParent(Node parent) {
         if (parent != null && !parents.contains(parent)) {
             parents.add(parent);

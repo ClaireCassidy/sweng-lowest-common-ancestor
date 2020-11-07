@@ -103,6 +103,50 @@ public class LowestCommonAncestorDagTest {
         assertTrue("Confirm 8 is not an ancestor of 10", !testDag.bfsForTarget(target, startNode));
     }
 
+    @Test
+    public void testColorAncestorsBlue() {
+        // Create graph shown in slides:
+        //                   [1]
+        //                  /   \
+        //               [2]     [3]
+        //              /           \
+        //           [4]             [5]
+        //          /               /   \
+        //       [6]             [7]     [8]
+        //                        |
+        //                       [10]
+        //                      / |  \
+        //                    [9] |   [11]
+        //                       [13]     \
+        //                                 [12]
+
+        DirectedAcyclicGraph testDag = generateTestGraph1();
+
+        Node target = testDag.getNodeWithValue(6);
+
+        testDag.colorAncestorsBlue(target);
+
+        ArrayList<Node> actualBlueNodes = testDag.getBlueNodes();
+        ArrayList<Node> expectedBlueNodes = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1),
+                testDag.getNodeWithValue(2), testDag.getNodeWithValue(4)));
+
+        assertTrue("Blue Nodes for target n6 => [n1,n2,n4]",
+                expectedBlueNodes.equals(actualBlueNodes));
+
+        testDag.resetColors();
+
+        target = testDag.getNodeWithValue(11);
+
+        testDag.colorAncestorsBlue(target);
+
+        actualBlueNodes = testDag.getBlueNodes();
+        expectedBlueNodes = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1), testDag.getNodeWithValue(3),
+                testDag.getNodeWithValue(5), testDag.getNodeWithValue(7), testDag.getNodeWithValue(10)));
+
+        assertTrue("Blue nodes for target n11 => [n5, n7, n10]",
+                expectedBlueNodes.equals(actualBlueNodes));
+    }
+
     public static DirectedAcyclicGraph generateTestGraph1() {
         // Create graph shown in slides:
         //                   [1]
