@@ -1,15 +1,25 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DirectedAcyclicGraph {
 
     ArrayList<Node> nodes;
+    Queue<Node> blueNodes;
+
 
     public DirectedAcyclicGraph() {
-        nodes = null;
+        nodes = new ArrayList<>();
+
     }
 
     public DirectedAcyclicGraph(ArrayList<Node> nodes) {
         this.nodes = nodes;
+    }
+
+    public ArrayList<Node> getNodes() {
+        return nodes;
     }
 
     public void printGraph() {
@@ -26,5 +36,26 @@ public class DirectedAcyclicGraph {
         }
     }
 
+    // testing a generic BFS algorithm
+    public void bfs(Node startNode) {
+        LinkedList<Node> q = new LinkedList<>();
+
+        q.add(startNode);
+        System.out.println("\nPerforming BFS w starting node "+startNode+"\n");
+
+        while(!q.isEmpty()) {
+            System.out.println("Queue: "+Arrays.toString(q.toArray()));
+            Node curNode = q.remove();
+
+            System.out.println("Cur Node: " + curNode);
+
+            for (Node n: curNode.getChildren()) {
+                q.add(n);
+                System.out.println("Adding "+n+" to queue");
+            }
+            System.out.println();
+        }
+
+    }
 
 }

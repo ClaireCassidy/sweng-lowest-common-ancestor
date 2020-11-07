@@ -94,5 +94,6 @@ public class LowestCommonAncestorDagTest {
         DirectedAcyclicGraph dag = generateTestGraph1();
 
         dag.printGraph();
+        dag.bfs(dag.getNodes().get(0));
     }
 }
