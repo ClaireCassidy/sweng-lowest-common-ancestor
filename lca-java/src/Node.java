@@ -46,4 +46,20 @@ public class Node {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    public boolean addParent(Node parent) {
+        if (parent != null && !parents.contains(parent)) {
+            parents.add(parent);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addChild(Node child) {
+        if (child != null && !children.contains(child)) {
+            children.add(child);
+            return true;
+        }
+        return false;
+    }
 }
