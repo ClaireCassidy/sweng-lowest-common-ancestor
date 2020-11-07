@@ -89,9 +89,9 @@ public class DirectedAcyclicGraph {
         return targetFound;
     }
 
-    public void colorAncestorsBlue(Node target) {
+    public void colourAncestorsBlue(Node target) {
         // performs a BFS from each node 'n' to determine if n is an ancestor of 'target'
-        // If so, colors 'n' blue.
+        // If so, colours 'n' blue.
 
         // Create a queue containing all the nodes in the graph
         LinkedList<Node> nodesInGraph = new LinkedList<>();
@@ -108,6 +108,27 @@ public class DirectedAcyclicGraph {
         }
     }
 
+    // colours any BLUE ancestors of the other target node RED if they are ancestors of this 'target'
+    public void colourAncestorsRed(Node target) {
+
+        // get the blue nodes
+        LinkedList<Node> blueNodes = new LinkedList<>(getBlueNodes());
+
+        // bfs from each blue node and if it can reach 'target' colour it red
+        while (!blueNodes.isEmpty()) {
+
+            Node curNode = blueNodes.remove();
+
+            boolean isAncestor = bfsForTarget(curNode, target);
+
+            if (isAncestor) {
+                curNode.setColor(Node.Color.RED);
+            }
+
+        }
+
+    }
+
     public ArrayList<Node> getBlueNodes() {
 
         ArrayList<Node> blueNodes = new ArrayList<>();
@@ -121,6 +142,26 @@ public class DirectedAcyclicGraph {
         }
 
         return blueNodes;
+
+    }
+
+    public ArrayList<Node> getRedNodes() {
+
+        ArrayList<Node> redNodes = new ArrayList<>();
+
+        System.out.println("\nRed nodes: ");
+        for (Node n:nodes) {
+            if (n.getColor().toLowerCase() == "red") {
+                System.out.println("\t"+n);
+                redNodes.add(n);
+            }
+        }
+
+        return redNodes;
+
+    }
+
+    public void adjustCount() {
 
     }
 

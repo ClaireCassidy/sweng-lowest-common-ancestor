@@ -124,7 +124,7 @@ public class LowestCommonAncestorDagTest {
 
         Node target = testDag.getNodeWithValue(6);
 
-        testDag.colorAncestorsBlue(target);
+        testDag.colourAncestorsBlue(target);
 
         ArrayList<Node> actualBlueNodes = testDag.getBlueNodes();
         ArrayList<Node> expectedBlueNodes = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1),
@@ -137,7 +137,7 @@ public class LowestCommonAncestorDagTest {
 
         target = testDag.getNodeWithValue(11);
 
-        testDag.colorAncestorsBlue(target);
+        testDag.colourAncestorsBlue(target);
 
         actualBlueNodes = testDag.getBlueNodes();
         expectedBlueNodes = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1), testDag.getNodeWithValue(3),
@@ -145,6 +145,61 @@ public class LowestCommonAncestorDagTest {
 
         assertTrue("Blue nodes for target n11 => [n5, n7, n10]",
                 expectedBlueNodes.equals(actualBlueNodes));
+
+        testDag.resetColors();
+    }
+
+
+    @Test
+    public void testColourAncestorsRed() {
+        // Create graph shown in slides:
+        //                   [1]
+        //                  /   \
+        //               [2]     [3]
+        //              /           \
+        //           [4]             [5]
+        //          /               /   \
+        //       [6]             [7]     [8]
+        //                        |
+        //                       [10]
+        //                      / |  \
+        //                    [9] |   [11]
+        //                       [13]     \
+        //                                 [12]
+
+        DirectedAcyclicGraph testDag = generateTestGraph1();
+
+        // suppose we had target nodes of n6 and n5
+        // Then we call colorAncestorsBlue on n6 and colorAncestorsRed on n5:
+
+        Node target1 = testDag.getNodeWithValue(6);
+        Node target2 = testDag.getNodeWithValue(5);
+
+        testDag.colourAncestorsBlue(target1);
+        testDag.colourAncestorsRed(target2);
+
+        ArrayList<Node> actualRedNodes = testDag.getRedNodes();
+        ArrayList<Node> expectedRedNodes = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1)));
+
+        assertTrue("Test that the red nodes for the graph using target1 = n6, target2 = n5 = [n1]",
+                actualRedNodes.equals(expectedRedNodes));
+
+        testDag.resetColors();
+
+        target1 = testDag.getNodeWithValue(8);
+        target2 = testDag.getNodeWithValue(9);
+
+        testDag.colourAncestorsBlue(target1);
+        testDag.colourAncestorsRed(target2);
+
+        actualRedNodes = testDag.getRedNodes();
+        expectedRedNodes = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1), testDag.getNodeWithValue(3),
+                testDag.getNodeWithValue(5)));
+
+        assertTrue("Test that the red nodes for the graph using target1 = n8, target2 = n9 => [n1, n3, n5]",
+                actualRedNodes.equals(expectedRedNodes));
+
+        testDag.resetColors();
     }
 
     public static DirectedAcyclicGraph generateTestGraph1() {
