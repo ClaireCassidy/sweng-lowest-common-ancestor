@@ -19,6 +19,13 @@ public class Node {
         this.color = Color.WHITE;
         this.children = children;
         this.parents = parents;
+
+        if (children == null) {
+            this.children = new ArrayList<>();
+        }
+        if (parents == null) {
+            this.parents = new ArrayList<>();
+        }
     }
 
     public ArrayList<Node> getParents() {
@@ -61,5 +68,16 @@ public class Node {
             return true;
         }
         return false;
+    }
+
+    public String getColor() {
+        if (color == Color.RED) return "red";
+        if (color == Color.BLUE) return "blue";
+        return "white";
+    }
+
+    @Override
+    public String toString() {
+        return "NODE("+val+")";
     }
 }

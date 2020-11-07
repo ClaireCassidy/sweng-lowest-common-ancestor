@@ -7,15 +7,15 @@ import org.junit.runners.JUnit4;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@RunWith(JUnit4.class)
+//@RunWith(JUnit4.class)
 public class LowestCommonAncestorDagTest {
 
-    @Test
-    public static void testDAG() {
-        
+    //@Test
+    public void testDAG() {
+
     }
 
-    private DirectedAcyclicGraph generateTestGraph1() {
+    public static DirectedAcyclicGraph generateTestGraph1() {
         // Create graph shown in slides:
         //                   [1]
         //                  /   \
@@ -88,5 +88,11 @@ public class LowestCommonAncestorDagTest {
                                                                     n8, n9, n10, n11, n12, n13));
 
         return new DirectedAcyclicGraph(dagNodes);
+    }
+
+    public static void main(String[] args) {
+        DirectedAcyclicGraph dag = generateTestGraph1();
+
+        dag.printGraph();
     }
 }
