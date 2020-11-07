@@ -19,7 +19,7 @@ public class LowestCommonAncestor {
 
         int val1 = 15;
         int val2 = 16;
-        Node lowestCommonAncestor = testTree.getLowestCommonAncestor(val1, val2);
+        BinaryTreeNode lowestCommonAncestor = testTree.getLowestCommonAncestor(val1, val2);
         System.out.println(String.format("LCA(%d, %d): %d", val1, val2, lowestCommonAncestor.getVal()));
     }
 

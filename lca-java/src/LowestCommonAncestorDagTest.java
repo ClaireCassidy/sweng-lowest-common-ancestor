@@ -30,6 +30,6 @@ public class LowestCommonAncestorDagTest {
         //  2. My LCA algorithm is embedded into the BinaryTree class, and also is expressed in terms of left
         //      child and right child
         // Therefore there's no point in writing tests at this point since there's no way to express the test
-        //  graph. I will have to rewrite my Node class and add a DAG class.
+        //  graph. I will have to rewrite my BinaryTreeNode class and add a DAG class.
     }
 }

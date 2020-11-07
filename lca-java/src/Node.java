@@ -1,62 +1,25 @@
-//public class Node<T> {
-//
-//    private T val;
-//
-//    public Node(T val) {
-//        this.val = val;
-//    }
-//
-//    public T getVal() {
-//        return this.val;
-//    }
-//
-//}
-
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class Node {
 
+    public static enum Color {
+        WHITE, RED, BLUE;
+    }
+
     private int val;
-    private Node lChild, rChild;
+    private Color color;
+    private int count;
+    private ArrayList<Node> children;
+    private ArrayList<Node> parents;
 
-    public Node(int val) {
+
+    public Node(int val, ArrayList<Node> children, ArrayList<Node> parents) {
         this.val = val;
-        this.lChild = null;
-        this.rChild = null;
+        this.count = 0;
+        this.color = Color.WHITE;
+        this.children = children;
+        this.parents = parents;
     }
 
-    public int getVal() {
-        return this.val;
-    }
-
-    public Node getlChild() {
-        return this.lChild;
-    }
-
-    public Node getrChild() {
-        return this.rChild;
-    }
-
-    public boolean setLChild(int val) {
-        if (this.lChild != null) {
-            return false;
-        }
-
-        this.lChild = new Node(val);
-        return true;
-    }
-
-    public boolean setRChild(int val) {
-        if (this.rChild != null) {
-            return false;
-        }
-
-        this.rChild = new Node(val);
-        return true;
-    }
-
+    
 }
-

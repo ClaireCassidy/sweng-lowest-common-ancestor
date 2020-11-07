@@ -4,16 +4,16 @@ import java.util.LinkedList;
 
 public class BinaryTree {
 
-    private Node root;
+    private BinaryTreeNode root;
 
     /* Constructors ------------ */
 
-    public BinaryTree(Node root) {
+    public BinaryTree(BinaryTreeNode root) {
         this.root = root;
     }
 
     public BinaryTree(int rootVal) {
-        this.root = new Node(rootVal);
+        this.root = new BinaryTreeNode(rootVal);
     }
 
     public BinaryTree() {
@@ -22,55 +22,55 @@ public class BinaryTree {
 
     /* ------------------------- */
 
-    public Node root() {
+    public BinaryTreeNode root() {
         return this.root;
     }
 
     public void insert(int val) {
 
         if (root == null) { // if root of subtree is null
-            root = new Node(val);
+            root = new BinaryTreeNode(val);
             return;
         }
 
-        Queue<Node> queue = new LinkedList<Node>();
+        Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
         queue.add(this.root);
-        Node curNode;
+        BinaryTreeNode curBinaryTreeNode;
 
         while (!queue.isEmpty()) {
-            curNode = queue.peek();
+            curBinaryTreeNode = queue.peek();
             queue.remove();
 
-            if (curNode.getlChild() == null) {
-//                System.out.println(String.format("setting lChild of %d: %d", curNode.getVal(), val));
-                curNode.setLChild(val);
-//                System.out.println(curNode.getlChild().getVal());
+            if (curBinaryTreeNode.getlChild() == null) {
+//                System.out.println(String.format("setting lChild of %d: %d", curBinaryTreeNode.getVal(), val));
+                curBinaryTreeNode.setLChild(val);
+//                System.out.println(curBinaryTreeNode.getlChild().getVal());
                 break;
-            } else queue.add(curNode.getlChild());
+            } else queue.add(curBinaryTreeNode.getlChild());
 
-            if (curNode.getrChild() == null) {
-//                System.out.println(String.format("setting rChild of %d: %d", curNode.getVal(), val));
-                curNode.setRChild(val);
-//                System.out.println(curNode.getrChild().getVal());
+            if (curBinaryTreeNode.getrChild() == null) {
+//                System.out.println(String.format("setting rChild of %d: %d", curBinaryTreeNode.getVal(), val));
+                curBinaryTreeNode.setRChild(val);
+//                System.out.println(curBinaryTreeNode.getrChild().getVal());
                 break;
-            } else queue.add(curNode.getrChild());
+            } else queue.add(curBinaryTreeNode.getrChild());
         }
     }
-    public Node getLowestCommonAncestor(int val1, int val2) {
+    public BinaryTreeNode getLowestCommonAncestor(int val1, int val2) {
 
-        ArrayList<Node> pathToVal1 = new ArrayList<>();
-        ArrayList<Node> pathToVal2 = new ArrayList<>();
+        ArrayList<BinaryTreeNode> pathToVal1 = new ArrayList<>();
+        ArrayList<BinaryTreeNode> pathToVal2 = new ArrayList<>();
 
         getPathTo(root, val1, pathToVal1);
         getPathTo(root, val2, pathToVal2);
 
         System.out.println("\n\nPATH1:");
-        for (Node node : pathToVal1) {
-            System.out.print(node.getVal() + " ");
+        for (BinaryTreeNode binaryTreeNode : pathToVal1) {
+            System.out.print(binaryTreeNode.getVal() + " ");
         }
         System.out.println("\nPATH2:");
-        for (Node node : pathToVal2) {
-            System.out.print(node.getVal() + " ");
+        for (BinaryTreeNode binaryTreeNode : pathToVal2) {
+            System.out.print(binaryTreeNode.getVal() + " ");
         }
         System.out.println("\n");
 
@@ -86,7 +86,7 @@ public class BinaryTree {
 
     }
 
-    private static boolean getPathTo(Node root, int val, ArrayList<Node> curPath) {
+    private static boolean getPathTo(BinaryTreeNode root, int val, ArrayList<BinaryTreeNode> curPath) {
         if (root == null) return false;
 
         curPath.add(root);

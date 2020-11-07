@@ -4,8 +4,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.ArrayList;
-
 @RunWith(JUnit4.class)
 public class LowestCommonAncestorTest {
 
@@ -14,8 +12,8 @@ public class LowestCommonAncestorTest {
         assertEquals("Binary tree constructor passed null should have a null root",
                 new BinaryTree().root(),
                 null);
-        assertEquals("Binary tree constructor passed a Node should have the root of that node",
-                new BinaryTree(new Node(3)).root().getVal(),
+        assertEquals("Binary tree constructor passed a BinaryTreeNode should have the root of that node",
+                new BinaryTree(new BinaryTreeNode(3)).root().getVal(),
                 3);
         assertEquals("Binary tree constructor passed an arbitrary integer should have that value as its root's value",
                 new BinaryTree(6).root().getVal(),
