@@ -1,5 +1,4 @@
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -201,73 +200,6 @@ public class LowestCommonAncestorDagTest {
         testDag.resetColors();
     }
 
-//    @Test
-//    public void testAdjustCount() {
-//        // Create graph shown in slides:
-//        //                   [1]
-//        //                  /   \
-//        //               [2]     [3]
-//        //              /           \
-//        //           [4]             [5]
-//        //          /               /   \
-//        //       [6]             [7]     [8]
-//        //                        |
-//        //                       [10]
-//        //                      / |  \
-//        //                    [9] |   [11]
-//        //                       [13]     \
-//        //                                 [12]
-//
-//        DirectedAcyclicGraph testDag = generateTestGraph1();
-//
-//        // Get the counts of red ancestors for target1 = n5, target2 = n6
-//        Node target1 = testDag.getNodeWithValue(5);
-//        Node target2 = testDag.getNodeWithValue(6);
-//
-//        testDag.colourAncestorsBlue(target1);         // color ancestors of n5 blue
-//        testDag.colourAncestorsRed(target2);        // color shared ancestors of n5 and n6 red
-//        //testDag.adjustCount();                      // increment each red node's parents' counts by 1
-//
-//        ArrayList<Node> redNodes = testDag.getRedNodes();
-//
-//        HashMap<Node, Integer> actualRedNodeCount = new HashMap<>();
-//        for (Node n: redNodes) {
-//            actualRedNodeCount.put(n, n.getCount());
-//        }
-//
-//        HashMap<Node, Integer> expectedRedNodeCount = new HashMap<>();
-//        expectedRedNodeCount.put(testDag.getNodeWithValue(1), 0);
-//
-//        assertTrue("Check the red nodes have expected count for t1 = n5, t2 = n6 => [N1:0]",
-//                actualRedNodeCount.equals(expectedRedNodeCount));
-//
-//        // reset the graph
-//        testDag.resetColors();
-//        testDag.resetCounts();
-//
-//        // Test again with target1 = n4, target2 = n6
-//        target1 = testDag.getNodeWithValue(4);
-//        target2 = testDag.getNodeWithValue(6);
-//
-//        testDag.colourAncestorsBlue(target1);
-//        testDag.colourAncestorsRed(target2);
-//        //testDag.adjustCount();
-//
-//        redNodes = testDag.getRedNodes();
-//
-//        actualRedNodeCount = new HashMap<>();
-//        for (Node n: redNodes) {
-//            actualRedNodeCount.put(n, n.getCount());
-//        }
-//
-//        expectedRedNodeCount = new HashMap<>();
-//        expectedRedNodeCount.put(testDag.getNodeWithValue(2), 0);
-//        expectedRedNodeCount.put(testDag.getNodeWithValue(1), 1);
-//
-//        assertTrue("Check the red nodes have expected count for t1 = n4, t2 = n6 => [N2:0, N1:1]",
-//                actualRedNodeCount.equals(expectedRedNodeCount));
-//    }
-
     @Test
     public void testLCAs() {
         // Create graph shown in slides:
@@ -301,7 +233,6 @@ public class LowestCommonAncestorDagTest {
                 actualLCAs.equals(expectedLCAs));
 
         // With target1 = 12, target2 = 13...
-        testDag.resetCounts();
         testDag.resetColors();
 
         target1 = testDag.getNodeWithValue(13);
@@ -314,7 +245,6 @@ public class LowestCommonAncestorDagTest {
                 actualLCAs.equals(expectedLCAs));
 
         // With target1 = 6, target2 = 4...
-        testDag.resetCounts();
         testDag.resetColors();
 
         target1 = testDag.getNodeWithValue(6);

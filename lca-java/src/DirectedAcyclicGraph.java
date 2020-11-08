@@ -1,17 +1,9 @@
-import sun.awt.image.ImageWatched;
 
 import java.util.*;
 
 public class DirectedAcyclicGraph {
 
     ArrayList<Node> nodes;
-    Queue<Node> blueNodes;
-
-
-    public DirectedAcyclicGraph() {
-        nodes = new ArrayList<>();
-
-    }
 
     public DirectedAcyclicGraph(ArrayList<Node> nodes) {
         this.nodes = nodes;
@@ -27,23 +19,6 @@ public class DirectedAcyclicGraph {
 
         colourAncestorsBlue(target1);
         colourAncestorsRed(target2);
-        //adjustCount();
-
-        // Get LCA nodes by incrementing parents
-//        ArrayList<Node> redNodes = getRedNodes();
-//        for (Node n : redNodes) {
-//            if (n.getCount() == 0) lCAs.add(n);
-//        }
-//
-//        // Also add any nodes with count > 0 that are direct parents of both nodes
-//        ArrayList<Node> parentsOfTarget1 = target1.getParents();
-//        ArrayList<Node> parentsOfTarget2 = target2.getParents();
-//
-//        for (Node p: parentsOfTarget1) {
-//            if (parentsOfTarget2.contains(p) && !lCAs.contains(p)) lCAs.add(p);
-//        }
-        HashMap<Node, Integer> distFromTarget1 = new HashMap<>();
-        HashMap<Node, Integer> distFromTarget2 = new HashMap<>();
 
         HashMap<Node, Integer> maxDistToTarget1Target2 = new HashMap<>();
 
@@ -60,10 +35,8 @@ public class DirectedAcyclicGraph {
         int minPathLength = Integer.MAX_VALUE;
 
         for (Map.Entry<Node, Integer> entry : maxDistToTarget1Target2.entrySet()) {
-//            String key = entry.getKey();
             Node redNode = entry.getKey();
             Integer distance = entry.getValue();
-//            Object value = entry.getValue();
 
             System.out.println("NODE: "+redNode+"\tDISTANCE: "+distance);
 
@@ -73,29 +46,13 @@ public class DirectedAcyclicGraph {
         }
 
         for (Map.Entry<Node, Integer> entry : maxDistToTarget1Target2.entrySet()) {
-//            String key = entry.getKey();
             Node redNode = entry.getKey();
             Integer distance = entry.getValue();
-//            Object value = entry.getValue();
 
             if (distance == minPathLength) lCAs.add(redNode);
         }
 
         return lCAs;
-    }
-
-    public void printGraph() {
-        for (Node node:nodes) {
-            System.out.printf("\n"+node+"{ \n\tParents: [");
-            for (Node parent: node.getParents()) {
-                System.out.print(parent+", ");
-            }
-            System.out.print("], \n\tChildren: [");
-            for (Node child: node.getChildren()) {
-                System.out.print(child+", ");
-            }
-            System.out.println("], \n\tColor: "+node.getColor()+", \n\tCount: "+node.getCount()+"\n}");
-        }
     }
 
     // Returns the length of the shortest path from startNode to endNode via BFS
@@ -247,32 +204,11 @@ public class DirectedAcyclicGraph {
 
     }
 
-    // increment each red node's parents' counts by 1
-    // any red node with count 0 is an LCA
-//    public void adjustCount() {
-//
-//        LinkedList<Node> redNodes = new LinkedList<>(getRedNodes());
-//
-//        for (Node n: redNodes) {
-//            for (Node parent: n.getParents()) {
-//                parent.incrCount();
-//            }
-//        }
-//    }
-
-    //public ArrayList<>
 
     // Sets all nodes' colours back to white
     public void resetColors() {
         for (Node n: nodes) {
             n.setColor(Node.Color.WHITE);
-        }
-    }
-
-    // sets all nodes' counts back to 0
-    public void resetCounts() {
-        for (Node n:nodes) {
-            n.setCount(0);
         }
     }
 
