@@ -161,8 +161,17 @@ public class DirectedAcyclicGraph {
 
     }
 
+    // increment each red node's parents' counts by 1
+    // any red node with count 0 is an LCA
     public void adjustCount() {
 
+        LinkedList<Node> redNodes = new LinkedList<>(getRedNodes());
+
+        for (Node n: redNodes) {
+            for (Node parent: n.getParents()) {
+                parent.incrCount();
+            }
+        }
     }
 
     // Sets all nodes' colours back to white
