@@ -26,10 +26,6 @@ public class Node {
         }
     }
 
-    public ArrayList<Node> getParents() {
-        return parents;
-    }
-
     public ArrayList<Node> getChildren() {
         return children;
     }

@@ -1,3 +1,4 @@
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 import org.junit.Test;
@@ -57,6 +58,42 @@ public class LowestCommonAncestorDagTest {
 
         assertTrue("Testing BFS traverses the graph in the expected order given start node 8",
                 expectedOrder.equals(actualOrder));
+    }
+
+    @Test
+    public void testAddParent() {
+        Node n1 = new Node(7, null,null);
+        Node n2 = new Node(5, null, null);
+
+        n1.addParent(n2);
+
+        assertTrue("Test that a node rejects attempts to insert a duplicate parent",
+                !n1.addParent(n2));
+    }
+
+    @Test
+    public void testAddChild() {
+        Node n1 = new Node(7, null,null);
+        Node n2 = new Node(5, null, null);
+
+        n1.addChild(n2);
+
+        assertTrue("Test that a node rejects attempts to insert a duplicate child",
+                !n1.addChild(n2));
+    }
+
+    @Test
+    public void testGetNodeWithVal() {
+
+        Node n1 = new Node(5, null, null);
+
+        DirectedAcyclicGraph testDag = new DirectedAcyclicGraph(new ArrayList<>(Arrays.asList(n1)));
+
+        assertEquals("Testing retrieval of a node from a graph given a value n", n1,
+                testDag.getNodeWithValue(5));
+
+        assertEquals("Test that attempts to retrieve a node with a value not in the graph returns null",
+                null, testDag.getNodeWithValue(7));
     }
 
     @Test
@@ -317,6 +354,15 @@ public class LowestCommonAncestorDagTest {
 
         assertTrue("Testing that the shortest path from n1 to n5 is n1 -> n5",
                 actualShortestPath.equals(expectedShortestPath));
+
+        // shortest path that doesn't exist
+        startNode = testDag.getNodeWithValue(3);
+        endNode = testDag.getNodeWithValue(1);
+
+        actualShortestPath = testDag.shortestPath(startNode, endNode);
+
+        assertTrue("Testing that the shortest path from n3 to n1 is null",
+                actualShortestPath == null);
     }
 
     public static DirectedAcyclicGraph generateTestGraph1() {
