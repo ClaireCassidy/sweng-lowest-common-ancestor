@@ -32,10 +32,20 @@ public class DirectedAcyclicGraph {
         colourAncestorsRed(target2);
         adjustCount();
 
+        // Get LCA nodes by incrementing parents
         ArrayList<Node> redNodes = getRedNodes();
         for (Node n : redNodes) {
             if (n.getCount() == 0) lCAs.add(n);
         }
+
+        // Also add any nodes with count > 0 that are direct parents of both nodes
+        ArrayList<Node> parentsOfTarget1 = target1.getParents();
+        ArrayList<Node> parentsOfTarget2 = target2.getParents();
+
+        for (Node p: parentsOfTarget1) {
+            if (parentsOfTarget2.contains(p) && !lCAs.contains(p)) lCAs.add(p);
+        }
+
 
         return lCAs;
     }

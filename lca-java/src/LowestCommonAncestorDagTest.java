@@ -402,6 +402,13 @@ public class LowestCommonAncestorDagTest {
         return new DirectedAcyclicGraph(dagNodes);
     }
 
+//    public static DirectedAcyclicGraph generateTestDag2() {
+//        // Create the graph shown in the slides:
+//        //          [1]
+//        //         /   \
+//        //      [2]     [3]
+//    }
+
 //    public static void main(String[] args) {
 //        DirectedAcyclicGraph dag = generateTestGraph1();
 //
