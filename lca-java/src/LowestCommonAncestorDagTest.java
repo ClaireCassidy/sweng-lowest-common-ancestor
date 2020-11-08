@@ -270,6 +270,63 @@ public class LowestCommonAncestorDagTest {
                 actualRedNodeCount.equals(expectedRedNodeCount));
     }
 
+    @Test
+    public void testLCAs() {
+        // Create graph shown in slides:
+        //                   [1]
+        //                  /   \
+        //               [2]     [3]
+        //              /           \
+        //           [4]             [5]
+        //          /               /   \
+        //       [6]             [7]     [8]
+        //                        |
+        //                       [10]
+        //                      / |  \
+        //                    [9] |   [11]
+        //                       [13]     \
+        //                                 [12]
+
+        DirectedAcyclicGraph testDag = generateTestGraph1();
+
+        // Test the LCAs are correct for target1, target2
+        Node target1 = testDag.getNodeWithValue(4);
+        Node target2 = testDag.getNodeWithValue(5);
+
+        ArrayList<Node> actualLCAs = testDag.getLCAs(target1, target2);
+        ArrayList<Node> expectedLCAs = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1)));
+
+        assertTrue("Testing that the LCAs of n4 and n5 = [n1]",
+                actualLCAs.equals(expectedLCAs));
+
+        // With target1 = 12, target2 = 13...
+        testDag.resetCounts();
+        testDag.resetColors();
+
+        target1 = testDag.getNodeWithValue(13);
+        target2 = testDag.getNodeWithValue(12);
+
+        actualLCAs = testDag.getLCAs(target1, target2);
+        expectedLCAs = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(10)));
+
+        assertTrue("Testing that the LCAs of n12 and n13 = [n10]",
+                actualLCAs.equals(expectedLCAs));
+
+        // With target1 = 6, target2 = 4...
+        testDag.resetCounts();
+        testDag.resetColors();
+
+        target1 = testDag.getNodeWithValue(6);
+        target2 = testDag.getNodeWithValue(4);
+
+        actualLCAs = testDag.getLCAs(target1, target2);
+        expectedLCAs = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(2)));
+
+        assertTrue("Testing that the LCAs of n6 and n4 = [n2]",
+                actualLCAs.equals(expectedLCAs));
+
+    }
+
     public static DirectedAcyclicGraph generateTestGraph1() {
         // Create graph shown in slides:
         //                   [1]

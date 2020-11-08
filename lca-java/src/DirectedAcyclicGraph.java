@@ -24,6 +24,22 @@ public class DirectedAcyclicGraph {
         return nodes;
     }
 
+    public ArrayList<Node> getLCAs(Node target1, Node target2) {
+
+        ArrayList<Node> lCAs = new ArrayList<>();
+
+        colourAncestorsBlue(target1);
+        colourAncestorsRed(target2);
+        adjustCount();
+
+        ArrayList<Node> redNodes = getRedNodes();
+        for (Node n : redNodes) {
+            if (n.getCount() == 0) lCAs.add(n);
+        }
+
+        return lCAs;
+    }
+
     public void printGraph() {
         for (Node node:nodes) {
             System.out.printf("\n"+node+"{ \n\tParents: [");
