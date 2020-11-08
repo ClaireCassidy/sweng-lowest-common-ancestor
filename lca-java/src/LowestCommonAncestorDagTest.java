@@ -5,9 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 @RunWith(JUnit4.class)
 public class LowestCommonAncestorDagTest {
@@ -203,72 +201,72 @@ public class LowestCommonAncestorDagTest {
         testDag.resetColors();
     }
 
-    @Test
-    public void testAdjustCount() {
-        // Create graph shown in slides:
-        //                   [1]
-        //                  /   \
-        //               [2]     [3]
-        //              /           \
-        //           [4]             [5]
-        //          /               /   \
-        //       [6]             [7]     [8]
-        //                        |
-        //                       [10]
-        //                      / |  \
-        //                    [9] |   [11]
-        //                       [13]     \
-        //                                 [12]
-
-        DirectedAcyclicGraph testDag = generateTestGraph1();
-
-        // Get the counts of red ancestors for target1 = n5, target2 = n6
-        Node target1 = testDag.getNodeWithValue(5);
-        Node target2 = testDag.getNodeWithValue(6);
-
-        testDag.colourAncestorsBlue(target1);         // color ancestors of n5 blue
-        testDag.colourAncestorsRed(target2);        // color shared ancestors of n5 and n6 red
-        testDag.adjustCount();                      // increment each red node's parents' counts by 1
-
-        ArrayList<Node> redNodes = testDag.getRedNodes();
-
-        HashMap<Node, Integer> actualRedNodeCount = new HashMap<>();
-        for (Node n: redNodes) {
-            actualRedNodeCount.put(n, n.getCount());
-        }
-
-        HashMap<Node, Integer> expectedRedNodeCount = new HashMap<>();
-        expectedRedNodeCount.put(testDag.getNodeWithValue(1), 0);
-
-        assertTrue("Check the red nodes have expected count for t1 = n5, t2 = n6 => [N1:0]",
-                actualRedNodeCount.equals(expectedRedNodeCount));
-
-        // reset the graph
-        testDag.resetColors();
-        testDag.resetCounts();
-
-        // Test again with target1 = n4, target2 = n6
-        target1 = testDag.getNodeWithValue(4);
-        target2 = testDag.getNodeWithValue(6);
-
-        testDag.colourAncestorsBlue(target1);
-        testDag.colourAncestorsRed(target2);
-        testDag.adjustCount();
-
-        redNodes = testDag.getRedNodes();
-
-        actualRedNodeCount = new HashMap<>();
-        for (Node n: redNodes) {
-            actualRedNodeCount.put(n, n.getCount());
-        }
-
-        expectedRedNodeCount = new HashMap<>();
-        expectedRedNodeCount.put(testDag.getNodeWithValue(2), 0);
-        expectedRedNodeCount.put(testDag.getNodeWithValue(1), 1);
-
-        assertTrue("Check the red nodes have expected count for t1 = n4, t2 = n6 => [N2:0, N1:1]",
-                actualRedNodeCount.equals(expectedRedNodeCount));
-    }
+//    @Test
+//    public void testAdjustCount() {
+//        // Create graph shown in slides:
+//        //                   [1]
+//        //                  /   \
+//        //               [2]     [3]
+//        //              /           \
+//        //           [4]             [5]
+//        //          /               /   \
+//        //       [6]             [7]     [8]
+//        //                        |
+//        //                       [10]
+//        //                      / |  \
+//        //                    [9] |   [11]
+//        //                       [13]     \
+//        //                                 [12]
+//
+//        DirectedAcyclicGraph testDag = generateTestGraph1();
+//
+//        // Get the counts of red ancestors for target1 = n5, target2 = n6
+//        Node target1 = testDag.getNodeWithValue(5);
+//        Node target2 = testDag.getNodeWithValue(6);
+//
+//        testDag.colourAncestorsBlue(target1);         // color ancestors of n5 blue
+//        testDag.colourAncestorsRed(target2);        // color shared ancestors of n5 and n6 red
+//        //testDag.adjustCount();                      // increment each red node's parents' counts by 1
+//
+//        ArrayList<Node> redNodes = testDag.getRedNodes();
+//
+//        HashMap<Node, Integer> actualRedNodeCount = new HashMap<>();
+//        for (Node n: redNodes) {
+//            actualRedNodeCount.put(n, n.getCount());
+//        }
+//
+//        HashMap<Node, Integer> expectedRedNodeCount = new HashMap<>();
+//        expectedRedNodeCount.put(testDag.getNodeWithValue(1), 0);
+//
+//        assertTrue("Check the red nodes have expected count for t1 = n5, t2 = n6 => [N1:0]",
+//                actualRedNodeCount.equals(expectedRedNodeCount));
+//
+//        // reset the graph
+//        testDag.resetColors();
+//        testDag.resetCounts();
+//
+//        // Test again with target1 = n4, target2 = n6
+//        target1 = testDag.getNodeWithValue(4);
+//        target2 = testDag.getNodeWithValue(6);
+//
+//        testDag.colourAncestorsBlue(target1);
+//        testDag.colourAncestorsRed(target2);
+//        //testDag.adjustCount();
+//
+//        redNodes = testDag.getRedNodes();
+//
+//        actualRedNodeCount = new HashMap<>();
+//        for (Node n: redNodes) {
+//            actualRedNodeCount.put(n, n.getCount());
+//        }
+//
+//        expectedRedNodeCount = new HashMap<>();
+//        expectedRedNodeCount.put(testDag.getNodeWithValue(2), 0);
+//        expectedRedNodeCount.put(testDag.getNodeWithValue(1), 1);
+//
+//        assertTrue("Check the red nodes have expected count for t1 = n4, t2 = n6 => [N2:0, N1:1]",
+//                actualRedNodeCount.equals(expectedRedNodeCount));
+//    }
 
     @Test
     public void testLCAs() {
@@ -295,6 +293,9 @@ public class LowestCommonAncestorDagTest {
 
         ArrayList<Node> actualLCAs = testDag.getLCAs(target1, target2);
         ArrayList<Node> expectedLCAs = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1)));
+
+        System.out.println("Actual: " + actualLCAs);
+        System.out.println("Expected: " + expectedLCAs);
 
         assertTrue("Testing that the LCAs of n4 and n5 = [n1]",
                 actualLCAs.equals(expectedLCAs));
@@ -325,6 +326,67 @@ public class LowestCommonAncestorDagTest {
         assertTrue("Testing that the LCAs of n6 and n4 = [n2]",
                 actualLCAs.equals(expectedLCAs));
 
+
+        testDag = generateTestGraph2();
+
+        target1 = testDag.getNodeWithValue(4);
+        target2 = testDag.getNodeWithValue(5);
+
+        actualLCAs = testDag.getLCAs(target1, target2);
+        expectedLCAs = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(3), testDag.getNodeWithValue(1)));
+
+
+
+        System.out.println("Actual: " + actualLCAs);
+        System.out.println("Expected: "+expectedLCAs);
+
+
+
+        assertTrue("Testing that the LCAs of n4 and n5 are [n3, n1]", actualLCAs.containsAll(expectedLCAs)
+                && actualLCAs.size() == expectedLCAs.size());
+    }
+
+    @Test
+    public void testShortestPath() {
+        // Create graph shown in slides:
+        //                   [1]
+        //                  /   \
+        //               [2]     [3]
+        //              /           \
+        //           [4]             [5]
+        //          /               /   \
+        //       [6]             [7]     [8]
+        //                        |
+        //                       [10]
+        //                      / |  \
+        //                    [9] |   [11]
+        //                       [13]     \
+        //                                 [12]
+
+        DirectedAcyclicGraph testDag = generateTestGraph1();
+
+        Node startNode = testDag.getNodeWithValue(1);
+        Node endNode = testDag.getNodeWithValue(8);
+
+        ArrayList<Node> actualShortestPath = testDag.shortestPath(startNode, endNode);
+        ArrayList<Node> expectedShortestPath = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1),
+                testDag.getNodeWithValue(3), testDag.getNodeWithValue(5), testDag.getNodeWithValue(8)));
+        System.out.println("Actual: "+actualShortestPath);
+        System.out.println("Expected: "+expectedShortestPath);
+
+        assertTrue("Testing that the shortest path from n1 to n8 is n1 -> n3 -> n5 -> n8",
+                actualShortestPath.equals(expectedShortestPath));
+
+        testDag = generateTestGraph2();
+
+        startNode = testDag.getNodeWithValue(1);
+        endNode = testDag.getNodeWithValue(5);
+
+        actualShortestPath = testDag.shortestPath(startNode, endNode);
+        expectedShortestPath = new ArrayList<>(Arrays.asList(testDag.getNodeWithValue(1), testDag.getNodeWithValue(5)));
+
+        assertTrue("Testing that the shortest path from n1 to n5 is n1 -> n5",
+                actualShortestPath.equals(expectedShortestPath));
     }
 
     public static DirectedAcyclicGraph generateTestGraph1() {
@@ -402,17 +464,50 @@ public class LowestCommonAncestorDagTest {
         return new DirectedAcyclicGraph(dagNodes);
     }
 
-//    public static DirectedAcyclicGraph generateTestDag2() {
-//        // Create the graph shown in the slides:
-//        //          [1]
-//        //         /   \
-//        //      [2]     [3]
-//    }
+    public static DirectedAcyclicGraph generateTestGraph2() {
+        // Create the graph shown in the slides:
+        //          [1]----\
+        //         / | \    \
+        //      [2]  |  [3]  |
+        //        \  |  /|   |
+        //         \ | / |   |
+        //          [4]  |   /
+        //            \  |  /
+        //             [5]-/
 
-//    public static void main(String[] args) {
-//        DirectedAcyclicGraph dag = generateTestGraph1();
-//
-//        dag.printGraph();
-//        bfs(dag.getNodes().get(0));
-//    }
+        // Create the nodes
+        Node n1     = new Node(1, null, null);
+        Node n2     = new Node(2, null, null);
+        Node n3     = new Node(3, null, null);
+        Node n4     = new Node(4, null, null);
+        Node n5     = new Node(5, null, null);
+
+        // Create their relationships
+        n1.addChild(n2);
+        n1.addChild(n3);
+        n1.addChild(n4);
+        n1.addChild(n5);
+
+        n2.addParent(n1);
+        n2.addChild(n4);
+
+        n3.addParent(n1);
+        n3.addChild(n4);
+        n3.addChild(n5);
+
+        n4.addParent(n1);
+        n4.addParent(n2);
+        n4.addParent(n3);
+        n4.addChild(n5);
+
+        n5.addParent(n1);
+        n5.addParent(n3);
+        n5.addParent(n4);
+
+        // Create the graph:
+        ArrayList<Node> nodes = new ArrayList<>(Arrays.asList(n1, n2, n3, n4, n5));
+
+        return new DirectedAcyclicGraph(nodes);
+    }
+
 }

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Node {
 
-    public static enum Color {
+    public enum Color {
         WHITE, RED, BLUE;
     }
 

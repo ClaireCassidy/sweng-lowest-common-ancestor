@@ -1,9 +1,6 @@
 import sun.awt.image.ImageWatched;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class DirectedAcyclicGraph {
 
@@ -30,22 +27,59 @@ public class DirectedAcyclicGraph {
 
         colourAncestorsBlue(target1);
         colourAncestorsRed(target2);
-        adjustCount();
+        //adjustCount();
 
         // Get LCA nodes by incrementing parents
+//        ArrayList<Node> redNodes = getRedNodes();
+//        for (Node n : redNodes) {
+//            if (n.getCount() == 0) lCAs.add(n);
+//        }
+//
+//        // Also add any nodes with count > 0 that are direct parents of both nodes
+//        ArrayList<Node> parentsOfTarget1 = target1.getParents();
+//        ArrayList<Node> parentsOfTarget2 = target2.getParents();
+//
+//        for (Node p: parentsOfTarget1) {
+//            if (parentsOfTarget2.contains(p) && !lCAs.contains(p)) lCAs.add(p);
+//        }
+        HashMap<Node, Integer> distFromTarget1 = new HashMap<>();
+        HashMap<Node, Integer> distFromTarget2 = new HashMap<>();
+
+        HashMap<Node, Integer> maxDistToTarget1Target2 = new HashMap<>();
+
         ArrayList<Node> redNodes = getRedNodes();
-        for (Node n : redNodes) {
-            if (n.getCount() == 0) lCAs.add(n);
+
+        for (Node redNode: redNodes) {
+            ArrayList<Node> pathToTarget1 = shortestPath(redNode, target1);
+            ArrayList<Node> pathToTarget2 = shortestPath(redNode, target2);
+
+            maxDistToTarget1Target2.put(redNode, Math.max(pathToTarget1.size(), pathToTarget2.size()));
         }
 
-        // Also add any nodes with count > 0 that are direct parents of both nodes
-        ArrayList<Node> parentsOfTarget1 = target1.getParents();
-        ArrayList<Node> parentsOfTarget2 = target2.getParents();
+        // find the smallest distance
+        int minPathLength = Integer.MAX_VALUE;
 
-        for (Node p: parentsOfTarget1) {
-            if (parentsOfTarget2.contains(p) && !lCAs.contains(p)) lCAs.add(p);
+        for (Map.Entry<Node, Integer> entry : maxDistToTarget1Target2.entrySet()) {
+//            String key = entry.getKey();
+            Node redNode = entry.getKey();
+            Integer distance = entry.getValue();
+//            Object value = entry.getValue();
+
+            System.out.println("NODE: "+redNode+"\tDISTANCE: "+distance);
+
+            if (distance < minPathLength) {
+                minPathLength = distance;
+            }
         }
 
+        for (Map.Entry<Node, Integer> entry : maxDistToTarget1Target2.entrySet()) {
+//            String key = entry.getKey();
+            Node redNode = entry.getKey();
+            Integer distance = entry.getValue();
+//            Object value = entry.getValue();
+
+            if (distance == minPathLength) lCAs.add(redNode);
+        }
 
         return lCAs;
     }
@@ -64,26 +98,52 @@ public class DirectedAcyclicGraph {
         }
     }
 
+    // Returns the length of the shortest path from startNode to endNode via BFS
+    public ArrayList<Node> shortestPath(Node startNode, Node endNode) {
+
+        LinkedList<ArrayList<Node>> paths = new LinkedList<>();
+        paths.add(new ArrayList<>(Arrays.asList(startNode)));
+
+        while (!paths.isEmpty()) {
+            ArrayList<Node> curPath = paths.remove();
+
+            Node lastElem = curPath.get(curPath.size()-1);
+
+            if (lastElem == endNode) {
+                return curPath;
+            }
+
+            for (Node child: lastElem.getChildren()) {
+                ArrayList<Node> newPath = new ArrayList<>(curPath);
+                newPath.add(child);
+
+                paths.add(newPath);
+            }
+        }
+
+        return null;
+    }
+
     // testing a generic BFS algorithm
     public ArrayList<Integer> bfs(Node startNode) {
         LinkedList<Node> q = new LinkedList<>();
         ArrayList<Integer> order = new ArrayList<>();
 
         q.add(startNode);
-        System.out.println("\nPerforming BFS w starting node "+startNode+"\n");
+        //System.out.println("\nPerforming BFS w starting node "+startNode+"\n");
 
         while(!q.isEmpty()) {
-            System.out.println("Queue: "+Arrays.toString(q.toArray()));
+            //System.out.println("Queue: "+Arrays.toString(q.toArray()));
             Node curNode = q.remove();
             order.add(curNode.getVal());
 
-            System.out.println("Cur Node: " + curNode);
+            //System.out.println("Cur Node: " + curNode);
 
             for (Node n: curNode.getChildren()) {
                 q.add(n);
-                System.out.println("Adding "+n+" to queue");
+                //System.out.println("Adding "+n+" to queue");
             }
-            System.out.println();
+            //System.out.println();
         }
         return order;
     }
@@ -189,16 +249,18 @@ public class DirectedAcyclicGraph {
 
     // increment each red node's parents' counts by 1
     // any red node with count 0 is an LCA
-    public void adjustCount() {
+//    public void adjustCount() {
+//
+//        LinkedList<Node> redNodes = new LinkedList<>(getRedNodes());
+//
+//        for (Node n: redNodes) {
+//            for (Node parent: n.getParents()) {
+//                parent.incrCount();
+//            }
+//        }
+//    }
 
-        LinkedList<Node> redNodes = new LinkedList<>(getRedNodes());
-
-        for (Node n: redNodes) {
-            for (Node parent: n.getParents()) {
-                parent.incrCount();
-            }
-        }
-    }
+    //public ArrayList<>
 
     // Sets all nodes' colours back to white
     public void resetColors() {
